@@ -11,46 +11,50 @@ A simple template for using Google's Teachable Machine image models with P5.js.
 - Click **Export Model** → **Upload my model**
 - Copy the link (e.g., `https://teachablemachine.withgoogle.com/models/ABC123/`)
 
-### 2. Update `config.json` with Your Model
+### 2. Update Your Settings in `sketch.js`
 
-Edit the settings in `config.json`:
-```json
-{
-  "settings": {
-    "modelURL": "https://teachablemachine.withgoogle.com/models/YOUR-MODEL/",
-    "klassificeringsDelay": 1500,
-    "sikkerhedsTaerskel": 0.8,
-    "visVideo": true
-  }
-}
-```
+Open `sketch.js` and update the settings at the top:
 
-### 3. Add Your Images
-1. Put your images in the `assets/` folder
-2. Name them after your classes (e.g., `Play.png`, `Stop.png`)
+```javascript
+// Model settings
+var modelURL = "https://teachablemachine.withgoogle.com/models/YOUR-MODEL/"
+var klassificeringsDelay = 1500
+var sikkerhedsTaerskel = 0.8
+var visVideo = true
 
-### 4. Configure Classes in `config.json`
-```json
-{
-  "classes": {
-    "YourClass1": {
-      "image": "assets/YourClass1.png"
-    },
-    "YourClass2": {
-      "image": "assets/YourClass2.png"
-    }
+// Classes - add your own classes here
+var classes = {
+  "YourClass1": {
+    "image": "assets/YourClass1.png"
+  },
+  "YourClass2": {
+    "image": "assets/YourClass2.png"
   }
 }
 ```
 
 **Important:** Class names must match exactly what you named them in Teachable Machine!
 
-### 5. Run It
+### 3. Add Your Images
+1. Put your images in the `assets/` folder
+2. Name them after your classes (e.g., `Play.png`, `Stop.png`)
+3. Update the class definitions in `sketch.js` to match
+
+### 4. Run It
+
 - Open `index.html` in your browser
 - Allow camera access when prompted
 - Check the console (Cmd+Option+I on Mac, F12 on Windows) for feedback
 
+**Using P5.js Online Editor:**
+1. Copy your sketch files to the p5.js editor
+2. Add ml5 library: Sketch → Add Library → search "ml5" → Add
+3. Upload `helper.js` as a separate file
+4. Upload your images to the editor and update paths in the `classes` object
+
 ## Settings Explained
+
+Edit these in `sketch.js`:
 
 - **modelURL**: Link to your Teachable Machine model
 - **klassificeringsDelay**: Milliseconds between predictions (1000 = 1 second)
@@ -60,21 +64,21 @@ Edit the settings in `config.json`:
 ## Troubleshooting
 
 ### Model too slow?
-Increase the delay in `config.json`:
-```json
-"klassificeringsDelay": 2000
+Increase the delay in `sketch.js`:
+```javascript
+var klassificeringsDelay = 2000
 ```
 
 ### Model too sensitive?
-Increase the confidence threshold in `config.json`:
-```json
-"sikkerhedsTaerskel": 0.9
+Increase the confidence threshold in `sketch.js`:
+```javascript
+var sikkerhedsTaerskel = 0.9
 ```
 
 ### Video not showing?
-Set in `config.json`:
-```json
-"visVideo": true
+Set in `sketch.js`:
+```javascript
+var visVideo = true
 ```
 
 ## Tips for Better Performance

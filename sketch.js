@@ -1,27 +1,35 @@
-// INDSTILLINGER (sættes fra config.json)
-var modelURL, klassificeringsDelay, sikkerhedsTaerskel, visVideo
+// INDSTILLINGER - Rediger disse værdier
+var modelURL = "https://teachablemachine.withgoogle.com/models/6yFjg-Itx/"
+var klassificeringsDelay = 1500
+var sikkerhedsTaerskel = 0.8
+var visVideo = true
+
+// KLASSER - Tilføj dine egne klasser og billeder her
+var classes = {
+  "Play": {
+    "image": "assets/Play.png"
+  },
+  "Stop": {
+    "image": "assets/Stop.png"
+  },
+  "Noting": {
+    "image": "assets/Nothing.png"
+  }
+}
 
 // SYSTEM VARIABLER
-var classifier, video, config, previousClass = ""
+var classifier, video, previousClass = ""
 
 function preload() {
-  //Hent config.json filen
-  config = loadJSON("config.json")
+  // Indlæs AI-modellen - p5 venter automatisk
+  classifier = ml5.imageClassifier(modelURL + "model.json")
   console.log("Indlæser AI-model...")
 }
 
 function setup() {
   noCanvas()
+  console.log("Model klar!")
   
-  // Hent indstillinger fra config.json
-  modelURL = config.settings.modelURL
-  klassificeringsDelay = config.settings.klassificeringsDelay
-  sikkerhedsTaerskel = config.settings.sikkerhedsTaerskel
-  visVideo = config.settings.visVideo
-  
-  // Indlæs AI-modellen
-  classifier = ml5.imageClassifier(modelURL + "model.json")
-
   // Tænd webcam
   video = createCapture(VIDEO)
   video.size(224, 224)
@@ -62,11 +70,11 @@ function classify() {
 }
 
 function shiftPage(className) {
-  if (config.classes[className]) {
-    select('#pageImage').attribute('src', config.classes[className].image)
+  if (classes[className]) {
+    select('#pageImage').attribute('src', classes[className].image)
     select('#pageView').style('display', 'flex')
   } else {
-    console.log("Klassen '" + className + "' findes ikke i config.json")
+    console.log("Klassen '" + className + "' findes ikke")
   }
 }
 

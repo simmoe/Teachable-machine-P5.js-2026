@@ -1,10 +1,4 @@
 {
-  "settings": {
-    "modelURL": "https://teachablemachine.withgoogle.com/models/6yFjg-Itx/",
-    "klassificeringsDelay": 200,
-    "sikkerhedsTaerskel": 0.8,
-    "visVideo": true
-  },
   "classes": {
     "Noting": {
       "image": "assets/Nothing.png"
