@@ -11,17 +11,9 @@ A simple template for using Google's Teachable Machine image models with P5.js.
 - Click **Export Model** → **Upload my model**
 - Copy the link (e.g., `https://teachablemachine.withgoogle.com/models/ABC123/`)
 
-### 2. Update Your Settings
+### 2. Update `config.json` with Your Model
 
-**Option A: Edit `sketch.js`** (easiest)
-```javascript
-var modelURL = "https://teachablemachine.withgoogle.com/models/YOUR-MODEL/"
-var klassificeringsDelay = 1500
-var sikkerhedsTaerskel = 0.8
-var visVideo = true
-```
-
-**Option B: Edit `config.json`** (more flexible)
+Edit the settings in `config.json`:
 ```json
 {
   "settings": {
@@ -68,20 +60,21 @@ var visVideo = true
 ## Troubleshooting
 
 ### Model too slow?
-Increase the delay:
-```javascript
-var klassificeringsDelay = 2000  // Check every 2 seconds instead of 1.5
+Increase the delay in `config.json`:
+```json
+"klassificeringsDelay": 2000
 ```
 
 ### Model too sensitive?
-Increase the confidence threshold:
-```javascript
-var sikkerhedsTaerskel = 0.9  // Require 90% confidence instead of 80%
+Increase the confidence threshold in `config.json`:
+```json
+"sikkerhedsTaerskel": 0.9
 ```
 
 ### Video not showing?
-```javascript
-var visVideo = true
+Set in `config.json`:
+```json
+"visVideo": true
 ```
 
 ## Tips for Better Performance
@@ -97,12 +90,12 @@ var visVideo = true
 The console shows only important messages (technical warnings are filtered out):
 
 ```
-🤖 Loading AI model...
-✅ Model ready!
-✅ Starting classification...
+Loading AI model...
+Model ready!
+Starting classification...
    Delay: 1500ms
    Confidence: 80%
-🎯 Found: Play (confidence: 95%)
+Found: Play (confidence: 95%)
 ```
 
 ---
